@@ -94,6 +94,16 @@ describe('<NewTodo />', () => {
     const newTodoInstance = component.find(NewTodo.WrappedComponent).instance();
     expect(newTodoInstance.state.dueDate.date).toEqual(date);
   });
+
+  it(`should set state properly on content input`, () => {
+    const content = 'TEST_CONTENT'
+    const component = mount(newTodo);
+    const wrapper = component.find('textarea');
+    wrapper.simulate('change', { target: { value: content } });
+    const newTodoInstance = component.find(NewTodo.WrappedComponent).instance();
+    expect(newTodoInstance.state.title).toEqual('');
+    expect(newTodoInstance.state.content).toEqual(content);
+  });
 });
 
 
